@@ -13,12 +13,12 @@ class Notifiable
 
     public function routeNotificationForSlack(): string
     {
-        return config('failed-job-monitor.slack.webhook_url');
+        return config('throttled-failed-job.slack.webhook_url');
     }
 
     public function routeNotificationForMsTeams()
     {
-        return config('failed-job-monitor.ms-teams.webhook_url');
+        return config('throttled-failed-job.ms-teams.webhook_url');
     }
 
     /**

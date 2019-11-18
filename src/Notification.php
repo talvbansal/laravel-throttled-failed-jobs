@@ -16,7 +16,7 @@ class Notification extends IlluminateNotification implements ThrottledNotificati
 
     public function via($notifiable): array
     {
-        return config('failed-job-monitor.channels');
+        return config('throttled-failed-jobs.channels');
     }
 
     public function setEvent(JobFailed $event): self

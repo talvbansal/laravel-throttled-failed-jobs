@@ -8,7 +8,7 @@ class Notifiable
 
     public function routeNotificationForMail(): string
     {
-        return config('failed-job-monitor.mail.to');
+        return config('throttled-failed-job.mail.to');
     }
 
     public function routeNotificationForSlack(): string

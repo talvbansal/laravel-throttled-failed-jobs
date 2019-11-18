@@ -52,5 +52,12 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TalvBansal\\ThrottledFailedJobMonitor\\FailedThrottledJobsServiceProvider"
+            ]
+        }
     }
 }

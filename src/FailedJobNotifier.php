@@ -1,11 +1,9 @@
 <?php
 
-
 namespace TalvBansal\ThrottledFailedJobMonitor;
 
-
-use Illuminate\Queue\QueueManager;
 use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Queue\QueueManager;
 use TalvBansal\ThrottledFailedJobMonitor\Exceptions\InvalidConfiguration;
 
 class FailedJobNotifier

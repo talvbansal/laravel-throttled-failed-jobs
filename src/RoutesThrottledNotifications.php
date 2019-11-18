@@ -1,11 +1,10 @@
 <?php
 
-
 namespace TalvBansal\ThrottledFailedJobMonitor;
 
 use Illuminate\Cache\RateLimiter;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Notifications\RoutesNotifications;
+use Illuminate\Support\Facades\Log;
 
 trait RoutesThrottledNotifications
 {
@@ -13,11 +12,13 @@ trait RoutesThrottledNotifications
         RoutesNotifications::notify as parentNotify;
     }
 
-    public function notify($instance) : void{
+    public function notify($instance) : void
+    {
         if ($instance instanceof ThrottledNotification) {
             $key = $this->throttleKey($instance);
             if ($this->limiter()->tooManyAttempts($key, $this->maxAttempts())) {
                 Log::notice("Skipping sending notification with key `$key`. Rate limit reached.");
+
                 return;
             }
 
@@ -43,7 +44,7 @@ trait RoutesThrottledNotifications
     protected function throttleKey($instance)
     {
         return mb_strtolower(
-            class_basename($instance) . '-' . $instance->throttleKeyId() . '-' . $this->getAuthIdentifier()
+            class_basename($instance).'-'.$instance->throttleKeyId().'-'.$this->getAuthIdentifier()
         );
     }
 

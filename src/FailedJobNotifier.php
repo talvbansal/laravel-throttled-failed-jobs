@@ -11,9 +11,9 @@ class FailedJobNotifier
     public function register()
     {
         app(QueueManager::class)->failing(function (JobFailed $event) {
-            $notifiable = app(config('throttled-failed-job.notifiable'));
+            $notifiable = app(config('throttled-failed-jobs.notifiable'));
 
-            $notification = app(config('throttled-failed-job.notification'))->setEvent($event);
+            $notification = app(config('throttled-failed-jobs.notification'))->setEvent($event);
 
             if (! $this->isValidNotificationClass($notification)) {
                 throw InvalidConfiguration::notificationClassInvalid(get_class($notification));
@@ -40,7 +40,7 @@ class FailedJobNotifier
 
     public function shouldSendNotification($notification)
     {
-        $callable = config('throttled-failed-job.notificationFilter');
+        $callable = config('throttled-failed-jobs.notificationFilter');
 
         if (! is_callable($callable)) {
             return true;

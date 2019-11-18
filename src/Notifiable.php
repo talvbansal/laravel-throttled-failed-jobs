@@ -1,9 +1,6 @@
 <?php
 
-
 namespace TalvBansal\ThrottledFailedJobMonitor;
-
-
 
 class Notifiable
 {

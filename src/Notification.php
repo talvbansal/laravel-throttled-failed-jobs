@@ -1,16 +1,13 @@
 <?php
 
-
 namespace TalvBansal\ThrottledFailedJobMonitor;
 
-
-use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Messages\SlackAttachment;
-use NotificationChannels\MsTeams\MsTeamsChannel;
-use NotificationChannels\MsTeams\MsTeamsMessage;
+use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification as IlluminateNotification;
+use Illuminate\Queue\Events\JobFailed;
+use NotificationChannels\MsTeams\MsTeamsMessage;
 
 class Notification extends IlluminateNotification implements ThrottledNotification
 {
@@ -60,15 +57,15 @@ class Notification extends IlluminateNotification implements ThrottledNotificati
             });
     }
 
-    public function toMsTeams(): MsTeamsMessage{
-
-        $content = sprintf("## Job class : %s
+    public function toMsTeams(): MsTeamsMessage
+    {
+        $content = sprintf('## Job class : %s
         > Exception message: %s
         Job body: %s
         ```php
             %s
         ```
-        ",
+        ',
             $this->event->exception->getMessage(),
             $this->event->job->resolveName(),
             $this->event->exception->getRawBody(),

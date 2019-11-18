@@ -35,6 +35,6 @@ return [
     ],
 
     'ms-teams' => [
-        'webhook_url' => env('MS_TEAMS_WEBHOOK_URL')
+        'webhook_url' => env('MS_TEAMS_WEBHOOK_URL'),
     ],
 ];

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace TalvBansal\ThrottledFailedJobMonitor;
-
 
 use Illuminate\Support\ServiceProvider;
 

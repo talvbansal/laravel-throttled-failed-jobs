@@ -1,6 +1,5 @@
 <?php
 
-
 namespace TalvBansal\ThrottledFailedJobMonitor\Exceptions;
 
 use Exception;

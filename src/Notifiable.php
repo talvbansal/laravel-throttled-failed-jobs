@@ -16,7 +16,7 @@ class Notifiable
         return config('throttled-failed-job.slack.webhook_url');
     }
 
-    public function routeNotificationForMsTeams()
+    public function routeNotificationForMsteams()
     {
         return config('throttled-failed-job.ms-teams.webhook_url');
     }

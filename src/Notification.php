@@ -73,7 +73,7 @@ class Notification extends IlluminateNotification implements ThrottledNotificati
         );
 
         return MsTeamsMessage::create()
-            ->title($this->event->exception->getMessage())
+            ->title('A job failed at '.config('app.url'))
             ->content($content);
     }
 

@@ -40,11 +40,13 @@ trait RoutesThrottledNotifications
     /**
      * Build the notification throttle key from the Notification class name,
      * the Notification's throttle key id and the current users id.
+     * @param ThrottledNotification $instance
+     * @return string
      */
-    protected function throttleKey($instance)
+    protected function throttleKey(ThrottledNotification $instance)
     {
         return mb_strtolower(
-            class_basename($instance).'-'.$instance->throttleKeyId().'-'.$this->getAuthIdentifier()
+            class_basename($instance).'-'.$instance->throttleKeyId()
         );
     }
 

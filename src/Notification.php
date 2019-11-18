@@ -68,7 +68,7 @@ class Notification extends IlluminateNotification implements ThrottledNotificati
         ',
             $this->event->exception->getMessage(),
             $this->event->job->resolveName(),
-            $this->event->exception->getRawBody(),
+            $this->event->job->getRawBody(),
             $this->event->exception->getTraceAsString(),
         );
 

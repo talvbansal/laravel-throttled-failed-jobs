@@ -36,22 +36,29 @@ This is the contents of the default configuration file.  Here you can specify th
 ```php
 return [
 
-    /**
+    /*
      * The notification that will be sent when a job fails.
      */
-    'notification' => \Spatie\FailedJobMonitor\Notification::class,
+    'notification' => \TalvBansal\ThrottledFailedJobMonitor\Notification::class,
 
-    /**
+    /*
      * The notifiable to which the notification will be sent. The default
      * notifiable will use the mail and slack configuration specified
      * in this config file.
      */
-    'notifiable' => \Spatie\FailedJobMonitor\Notifiable::class,
+    'notifiable' => \TalvBansal\ThrottledFailedJobMonitor\Notifiable::class,
 
-    /**
+    /*
+     * By default notifications are sent for all failures. You can pass a callable to filter
+     * out certain notifications. The given callable will receive the notification. If the callable
+     * return false, the notification will not be sent.
+     */
+    'notificationFilter' => null,
+
+    /*
      * The channels to which the notification will be sent.
      */
-    'channels' => ['mail', 'slack'],
+    'channels' => ['mail', 'slack', 'msteams'],
 
     'mail' => [
         'to' => 'email@example.com',
@@ -60,6 +67,17 @@ return [
     'slack' => [
         'webhook_url' => env('FAILED_JOB_SLACK_WEBHOOK_URL'),
     ],
+
+    'ms-teams' => [
+        'webhook_url' => env('MS_TEAMS_WEBHOOK_URL'),
+    ],
+
+    /*
+     * The length of the throttle window in minutes. Eg: 10 would mean
+     * only one notification of certain type would be actually sent
+     * within a 10 minute window...
+     */
+    'throttle_decay' => 10,
 ];
 ``` 
 
@@ -67,12 +85,12 @@ return [
 
 ### Customizing the notification
  
-The default notification class provided by this package has support for mail and Slack. 
+The default notification class provided by this package has support for mail, Slack and [MS Teams](https://www.talvbansal.me/blog/send-notifications-to-ms-teams-with-laravel/). 
 
 If you want to customize the notification you can specify your own notification class in the config file.
 
 ```php
-// config/laravel-failed-job-monitor.php
+// config/throttled-failed-jobs.php
 return [
     ...
     'notification' => \App\Notifications\CustomNotificationForFailedJobMonitor::class,
@@ -86,9 +104,21 @@ The default notifiable class provided by this package use the `channels`, `mail`
 If you want to customize the notifiable you can specify your own notifiable class in the config file.
 
 ```php
-// config/laravel-failed-job-monitor.php
+// config/throttled-failed-jobs.php
 return [
     'notifiable' => \App\CustomNotifiableForFailedJobMonitor::class,
+    ...
+```
+
+### Customizing the throttle window
+
+The default config sets a window of 10 minutes per notification type. 
+You can easily change the length of that window so that you only receive 1 notification of a given type per x number of minutes in the config file.
+
+```php
+// config/throttled-failed-jobs.php
+return [
+        'throttle_decay' => 10,
     ...
 ```
 

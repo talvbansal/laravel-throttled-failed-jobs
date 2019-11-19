@@ -7,6 +7,7 @@ use Illuminate\Notifications\Messages\SlackAttachment;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification as IlluminateNotification;
 use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Support\Str;
 use NotificationChannels\MsTeams\MsTeamsMessage;
 
 class Notification extends IlluminateNotification implements ThrottledNotification
@@ -79,13 +80,13 @@ Job body: %s
 
     public function throttleDecayMinutes(): int
     {
-        return 15;
+        return config('throttled-failed-jobs.throttle_decay');
     }
 
     public function throttleKeyId()
     {
         if($this->getEvent()->exception instanceof \Exception){
-            return $this->getEvent()->exception->getMessage();
+            return Str::kebab($this->getEvent()->exception->getMessage());
         }
 
         // fall back throttle key, use the notification name...

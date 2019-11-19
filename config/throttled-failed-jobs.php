@@ -24,7 +24,7 @@ return [
     /*
      * The channels to which the notification will be sent.
      */
-    'channels' => ['mail', 'slack', 'ms-teams'],
+    'channels' => ['mail', 'slack', 'msteams'],
 
     'mail' => [
         'to' => 'email@example.com',
@@ -37,4 +37,6 @@ return [
     'ms-teams' => [
         'webhook_url' => env('MS_TEAMS_WEBHOOK_URL'),
     ],
+
+    'throttle_decay' => 10, // in minutes...
 ];

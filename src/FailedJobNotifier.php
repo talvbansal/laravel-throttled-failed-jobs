@@ -4,6 +4,7 @@ namespace TalvBansal\ThrottledFailedJobMonitor;
 
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\QueueManager;
+use Illuminate\Support\Facades\Log;
 use TalvBansal\ThrottledFailedJobMonitor\Exceptions\InvalidConfiguration;
 
 class FailedJobNotifier

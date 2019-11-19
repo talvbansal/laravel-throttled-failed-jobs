@@ -2,8 +2,8 @@
 
 namespace TalvBansal\ThrottledFailedJobMonitor;
 
-use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification as NotificationFacade;
 use TalvBansal\ThrottledFailedJobMonitor\Dummy\AnotherNotifiable;
@@ -11,7 +11,7 @@ use TalvBansal\ThrottledFailedJobMonitor\Dummy\AnotherNotification;
 use TalvBansal\ThrottledFailedJobMonitor\Dummy\Job;
 use TalvBansal\ThrottledFailedJobMonitor\Event\NotificationLimitReached;
 
-class FailedThrottledJobTest extends TestCase
+class FailedThrottledJobsTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -22,7 +22,7 @@ class FailedThrottledJobTest extends TestCase
         NotificationFacade::fake();
 
         Event::fake([
-            NotificationLimitReached::class
+            NotificationLimitReached::class,
         ]);
 
         $this->artisan('cache:clear');
@@ -37,7 +37,8 @@ class FailedThrottledJobTest extends TestCase
     }
 
     /** @test */
-    public function it_can_throttle_notifications_on_failure(){
+    public function it_can_throttle_notifications_on_failure()
+    {
         $this->fireFailedEvent();
 
         NotificationFacade::assertSentTo(new Notifiable(), Notification::class);

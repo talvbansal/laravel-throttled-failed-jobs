@@ -60,11 +60,11 @@ class Notification extends IlluminateNotification implements ThrottledNotificati
     public function toMsTeams(): MsTeamsMessage
     {
         $content = sprintf('## Job class : %s
-        > Exception message: %s
-        Job body: %s
-        ```php
-            %s
-        ```
+> Exception message: %s
+Job body: %s
+    ```php
+        %s
+    ```
         ',
             $this->event->exception->getMessage(),
             $this->event->job->resolveName(),
@@ -79,11 +79,16 @@ class Notification extends IlluminateNotification implements ThrottledNotificati
 
     public function throttleDecayMinutes(): int
     {
-        return 1;
+        return 15;
     }
 
     public function throttleKeyId()
     {
-        return $this->event->exception->getMessage();
+        if($this->getEvent()->exception instanceof \Exception){
+            return $this->getEvent()->exception->getMessage();
+        }
+
+        // fall back throttle key, use the notification name...
+        return static::class;
     }
 }

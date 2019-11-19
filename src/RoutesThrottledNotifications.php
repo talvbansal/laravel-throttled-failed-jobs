@@ -22,7 +22,7 @@ trait RoutesThrottledNotifications
                 return;
             }
 
-            $this->limiter()->hit($key, $instance->throttleDecayMinutes());
+            $this->limiter()->hit($key, ($instance->throttleDecayMinutes() * 60));
         }
 
         // Execute the original notify() method.
@@ -32,14 +32,14 @@ trait RoutesThrottledNotifications
     /**
      * Get the rate limiter instance.
      */
-    protected function limiter()
+    protected function limiter() : RateLimiter
     {
         return app(RateLimiter::class);
     }
 
     /**
      * Build the notification throttle key from the Notification class name,
-     * the Notification's throttle key id and the current users id.
+     * the Notification's throttle key id.
      * @param ThrottledNotification $instance
      * @return string
      */

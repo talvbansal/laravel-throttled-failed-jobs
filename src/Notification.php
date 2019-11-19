@@ -84,7 +84,7 @@ Job body: %s
 
     public function throttleKeyId()
     {
-        if($this->getEvent()->exception instanceof \Exception){
+        if ($this->getEvent()->exception instanceof \Exception) {
             return $this->getEvent()->exception->getMessage();
         }
 

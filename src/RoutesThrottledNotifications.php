@@ -9,10 +9,7 @@ use Illuminate\Support\Str;
 use TalvBansal\ThrottledFailedJobMonitor\Event\NotificationLimitReached;
 
 /**
- * Trait RoutesThrottledNotifications
- * @package TalvBansal\ThrottledFailedJobMonitor
- *
- * Adapted from https://clubstudio.co.uk/journal/rate-limiting-notifications-in-laravel
+ * Trait RoutesThrottledNotifications.
  */
 trait RoutesThrottledNotifications
 {

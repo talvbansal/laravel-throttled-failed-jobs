@@ -1,8 +1,6 @@
 <?php
 
-
 namespace TalvBansal\ThrottledFailedJobMonitor;
-
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -14,6 +12,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     {
         return [FailedThrottledJobsServiceProvider::class];
     }
+
     public function getEnvironmentSetUp($app)
     {
         $app['config']->set('cache.default', 'array');

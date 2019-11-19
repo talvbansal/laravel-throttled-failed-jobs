@@ -70,7 +70,7 @@ Job body: %s
             $this->event->exception->getMessage(),
             $this->event->job->resolveName(),
             $this->event->job->getRawBody(),
-            $this->event->exception->getTraceAsString(),
+            $this->event->exception->getTraceAsString()
         );
 
         return MsTeamsMessage::create()

@@ -63,19 +63,17 @@ class Notification extends IlluminateNotification implements ThrottledNotificati
         $content = sprintf('## Job class : %s
 > Exception message: %s
 Job body: %s
-    ```php
-        %s
-    ```
         ',
             $this->event->exception->getMessage(),
             $this->event->job->resolveName(),
-            $this->event->job->getRawBody(),
-            $this->event->exception->getTraceAsString()
+            $this->event->job->getRawBody()
         );
 
         return MsTeamsMessage::create()
+            ->type('error')
             ->title('A job failed at '.config('app.url'))
-            ->content($content);
+            ->content($content)
+            ->code($this->event->exception->getTraceAsString());
     }
 
     public function throttleDecayMinutes(): int

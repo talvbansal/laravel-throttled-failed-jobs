@@ -17,7 +17,7 @@ trait RoutesThrottledNotifications
         RoutesNotifications::notify as parentNotify;
     }
 
-    public function notify($instance) : void
+    public function notify($instance): void
     {
         if ($instance instanceof ThrottledNotification) {
             $key = $this->throttleKey($instance);
@@ -38,7 +38,7 @@ trait RoutesThrottledNotifications
     /**
      * Get the rate limiter instance.
      */
-    protected function limiter() : RateLimiter
+    protected function limiter(): RateLimiter
     {
         return app(RateLimiter::class);
     }

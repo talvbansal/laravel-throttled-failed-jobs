@@ -46,7 +46,8 @@ trait RoutesThrottledNotifications
     /**
      * Build the notification throttle key from the Notification class name,
      * the Notification's throttle key id.
-     * @param ThrottledNotification $instance
+     *
+     * @param  ThrottledNotification  $instance
      * @return string
      */
     protected function throttleKey(ThrottledNotification $instance)
